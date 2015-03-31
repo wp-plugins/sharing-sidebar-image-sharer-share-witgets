@@ -19,7 +19,7 @@
 * +--------------------------------------------------------------------------+
 */
 /**
-* Plugin Name: Sharing Sidebar + Image Sharer | Share Widgets
+* Plugin Name: Sharing Sidebar + Image Sharer | Share Widget
 * Plugin URI: http://profitquery.com/sharing_witgets.html
 * Description: Simply widgets for growth 3x website shares, referrals from social network and all for free.
 * Version: 1.0

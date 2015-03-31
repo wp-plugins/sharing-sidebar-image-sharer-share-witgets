@@ -1,4 +1,4 @@
-=== Sharing Sidebar + Image Sharer | Share Widgets ===
+=== Sharing Sidebar + Image Sharer | Share Widget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/sharing_witgets.html
 Tags: addthis, profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, post, social sharing, free widgets, profitquery sharing, growth tool, boost widget, referrals, pinterest, facebook, google plus, vk, twitter, tumblr, smm
