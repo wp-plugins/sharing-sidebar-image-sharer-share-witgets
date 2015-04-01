@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/sharing_witgets.html
 Tags: addthis, profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, images, post, social, free, profitquery sharing, growth, boost, referrals, pinterest, facebook, google plus, vk, twitter, tumblr, admin , AJAX, content, ecommerce, Facebook, image, images, javascript, link, links, media, page, pages, photo, photos, plugin, Post, posts, seo, Share, sidebar, social, twitter, widget, widgets, wordpress
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website shares, referrals from social network and all for free.
@@ -117,6 +117,9 @@ All of the options required through this plugin require javascript. JavaScript m
 
 
 == Changelog ==
+= 1.0.2 =
+add fade in fade out
+
 = 1.0.1 =
 sidebar sharing url fixed
 
