@@ -21,7 +21,7 @@
 #free_profitquery .btn-m {font-size: 15px; color: #F4335C; border: 1px solid red; padding: 4px 20px 7px; border-radius: 3px; margin-top: 15px;}
 #free_profitquery img {max-width: 100%;}
 #free_profitquery .pq-panel-body>.pq-sm-6 {margin-top: 25px; margin-bottom: 0px;}
-#free_profitquery input, #free_profitquery select {color: #B1B1B1; font-size: 16px; border-radius: 2px; border: 1px solid rgb(176, 176, 176); line-height: 28px; box-sizing: border-box;}
+#free_profitquery input[type="text"], #free_profitquery input[type="checkbox"], #free_profitquery select {color: #B1B1B1; font-size: 16px; border-radius: 2px; border: 1px solid rgb(176, 176, 176); line-height: 28px; box-sizing: border-box;}
 #free_profitquery .pq-sm-6>select  {width: 100%; box-sizing: border-box; padding: 4px; display: block; border: 1px solid rgb(176, 176, 176);}
 #free_profitquery .pq-sm-6>input{width: 90%; box-sizing: border-box;padding: 4px;height: 31px;}
 #free_profitquery .pq-sm-6>img{display: block; margin: 0 auto;}
@@ -77,6 +77,14 @@
 #free_profitquery .pq_services .pq_fb, #free_profitquery .pq_services .pq_tw, #free_profitquery .pq_services .pq_gp, #free_profitquery .pq_services .pq_pi, #free_profitquery .pq_services .pq_vk, #free_profitquery .pq_services .pq_od {display: inline-block; float: left;}
 #free_profitquery .pq_services input[type="text"] {width: 65%; float: right; display: inline-block;}
 #free_profitquery .pq_services p {display: inline-block; line-height: 30px; float: left; padding-left: 10px;}
+
+#free_profitquery .pq_str {width: 100%; max-width: 560px; background: rgb(229, 229, 229); height: inherit;}
+#free_profitquery .pq_str:nth-child(even) {background: transparent;}
+#free_profitquery .x30 .pq_str label input, #free_profitquery .x30 .pq_str label p {display: inline-block; vertical-align: middle;}
+#free_profitquery .x30 .pq_str label {float: left; margin: 0; height: 32px; line-height: 30px; padding: 3px 3px 3px 10px;}
+#free_profitquery .x30 .pq_str label:last-child {float: right; padding: 3px 10px 3px 3px;}
+#free_profitquery .x30 .pq_str label p{font-size: 14px;}
+#free_profitquery .x30 .pq_str label input[type="text"]  {width: 150px; display: inline-block; margin: 0; padding: 0 0 0 5px; height: 27px; font-size: 14px;}
 /*.collapse {display: none; visibility: hidden;}
 .collapse.in {display: block; visibility: visible;}*/
 #free_profitquery a.pq_help {font-size: 14px; color: black; cursor: pointer; margin-top: 12px; display: block;}

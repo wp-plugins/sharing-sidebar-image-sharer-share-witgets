@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 1.0.3
+* @version  SVN: 1.0.4
 */
 
 class ProfitQueryShareWidgetsClass
@@ -135,8 +135,13 @@ class ProfitQueryShareWidgetsClass
 		if(isset($data[socnet])){
 			unset($return[socnet]);
 			foreach((array)$data[socnet] as $k => $v){
-				if($v){
-					$return[socnet][$k] = $v;
+				if($v){					
+					$return[socnet][$k] = $data[socnetOption][$k];
+					if($data[socnetOption][$k][type] == 'pq'){
+						$return[socnet][$k][exactPageShare] = 0;
+					} else {
+						$return[socnet][$k][exactPageShare] = 1;
+					}
 				}
 			}
 			
@@ -220,7 +225,8 @@ class ProfitQueryShareWidgetsClass
 		
 		if(!$this->_options[imageSharer]){
 			$this->_options[imageSharer][disabled] = 0;
-			$this->_options[imageSharer][socnet] = array('FB'=>1, 'GP'=>1, 'TW'=>1, 'PI'=>1);				
+			$this->_options[imageSharer][socnet] = array('FB'=>1, 'TW'=>1, 'PI'=>1, 'TR'=>1);
+			$this->_options[imageSharer][socnetOption] = array('FB'=>array('type'=>'pq'), 'TW'=>array('type'=>'pq'), 'PI'=>array('type'=>''), 'TR'=>array('type'=>''));
 			$this->_options[imageSharer][design][color] = 'c4';
 			$this->_options[imageSharer][design][size] = 'x30';
 			$this->_options[imageSharer][design][shadow] = 'sh6';
@@ -298,6 +304,7 @@ class ProfitQueryShareWidgetsClass
 				if(trim($_POST[thankPopup][img])) $this->_options['thankPopup']['img'] = sanitize_text_field($_POST[thankPopup][img]); else $this->_options['thankPopup']['img'] = '';
 				if(trim($_POST[thankPopup][imgUrl])) $this->_options['thankPopup']['imgUrl'] = sanitize_text_field($_POST[thankPopup][imgUrl]); else $this->_options['thankPopup']['imgUrl'] = '';				
 			}												
+						
 			
 			//imageSharer
 			if($_POST[imageSharer][afterProceed][follow] == 'on'){
@@ -374,8 +381,7 @@ class ProfitQueryShareWidgetsClass
 					$this->_options['sharingSideBar']['afterProceed']['follow'] = 0;
 					$this->_options['sharingSideBar']['afterProceed']['thank'] = 0;
 				}
-			}
-			
+			}			
 			//imageSharer
 			if($_POST[imageSharer]){
 				if($_POST[imageSharer][enabled] == 'on') $this->_options['imageSharer']['disabled'] = 0; else $this->_options['imageSharer']['disabled'] = 1;
@@ -391,6 +397,17 @@ class ProfitQueryShareWidgetsClass
                     if($_POST[imageSharer][socnet][OD] == 'on') $this->_options[imageSharer][socnet][OD] = 1; else $this->_options[imageSharer][socnet][OD] = 0;
                     if($_POST[imageSharer][socnet][LJ] == 'on') $this->_options[imageSharer][socnet][LJ] = 1; else $this->_options[imageSharer][socnet][LJ] = 0;                    
 				}
+				
+				if($_POST[imageSharer][socnetOption]){
+					if($_POST[imageSharer][socnetOption][FB]) $this->_options['imageSharer']['socnetOption'][FB] = $_POST[imageSharer][socnetOption][FB]; else unset($this->_options['imageSharer']['socnetOption'][FB]);
+					if($_POST[imageSharer][socnetOption][TW]) $this->_options['imageSharer']['socnetOption'][TW] = $_POST[imageSharer][socnetOption][TW]; else unset($this->_options['imageSharer']['socnetOption'][TW]);
+					if($_POST[imageSharer][socnetOption][PI]) $this->_options['imageSharer']['socnetOption'][PI] = $_POST[imageSharer][socnetOption][PI]; else unset($this->_options['imageSharer']['socnetOption'][PI]);
+					if($_POST[imageSharer][socnetOption][GP]) $this->_options['imageSharer']['socnetOption'][GP] = $_POST[imageSharer][socnetOption][GP]; else unset($this->_options['imageSharer']['socnetOption'][GP]);
+					if($_POST[imageSharer][socnetOption][TR]) $this->_options['imageSharer']['socnetOption'][TR] = $_POST[imageSharer][socnetOption][TR]; else unset($this->_options['imageSharer']['socnetOption'][TR]);
+					if($_POST[imageSharer][socnetOption][VK]) $this->_options['imageSharer']['socnetOption'][VK] = $_POST[imageSharer][socnetOption][VK]; else unset($this->_options['imageSharer']['socnetOption'][VK]);
+					if($_POST[imageSharer][socnetOption][OD]) $this->_options['imageSharer']['socnetOption'][OD] = $_POST[imageSharer][socnetOption][OD]; else unset($this->_options['imageSharer']['socnetOption'][OD]);
+				}
+				
 				if(trim($_POST[imageSharer][design][color])) $this->_options['imageSharer']['design']['color'] = sanitize_text_field($_POST[imageSharer][design][color]); else $this->_options['imageSharer']['design']['color'] = 'c4';
 				if(trim($_POST[imageSharer][design][form])) $this->_options['imageSharer']['design']['form'] = sanitize_text_field($_POST[imageSharer][design][form]); else $this->_options['imageSharer']['design']['form'] = '';
 				if(trim($_POST[imageSharer][design][size])) $this->_options['imageSharer']['design']['size'] = sanitize_text_field($_POST[imageSharer][design][size]); else $this->_options['imageSharer']['design']['size'] = 'x30';
@@ -520,7 +537,6 @@ class ProfitQueryShareWidgetsClass
 			</div>
 			';	
 		} else if((int)$this->_options['errorApiKey'] == 0) {			
-			
 			if($this->is_follow_enabled_and_not_setup()){
 				echo '
 						<div style="display: block;width: auto; margin: 0 15px 0 5px; background: rgba(242, 20, 67, 0.5); text-align: center;">
@@ -768,49 +784,111 @@ class ProfitQueryShareWidgetsClass
 							<p style="position: absolute; top: 88px; font-size: 16px; font-family: arial; color: #9A9A9A; width: 50%; right: 0; padding-left: 49px; box-sizing: border-box;">px</p>
 						</div>
 						</label>
-						<label>
-						<div class="pq_box">
-							<p>Follow Popup After Success</p><div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-id-switch-size bootstrap-switch-animate bootstrap-switch-mini bootstrap-switch-success">
-							<input type="checkbox" name="imageSharer[afterProceed][follow]" <?php if((int)$this->_options[imageSharer][afterProceed][follow] == 1) echo 'checked';?>></div>
-						</div>
-						</label>
-						<label>
-						<div class="pq_box">
-							<p>Thank Popup After Success</p><div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-id-switch-size bootstrap-switch-animate bootstrap-switch-mini bootstrap-switch-success">
-							<input type="checkbox" name="imageSharer[afterProceed][thank]" <?php if((int)$this->_options[imageSharer][afterProceed][thank] == 1) echo 'checked';?>></div>
-							<div class="pq_tooltip" data-toggle="tooltip" data-placement="left" title="For enable Follow Popup must be Off"></div>
-						</div></label>						
+												
 						
 						</div><div class="clear"></div>
 							
 						<a href="javascript:void(0)" onclick="document.getElementById('Image_Sharer').style.display='none';"><div class="pq_close"></div></a>
 						<div class="pq-sm-12 x30" style="padding-top: 25px;">											
-							<label><div class="pq_fb"></div>
-							<input type="checkbox" name="imageSharer[socnet][FB]" <?php if((int)$this->_options[imageSharer][socnet][FB] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_tw"></div>
-							<input type="checkbox" name="imageSharer[socnet][TW]" <?php if((int)$this->_options[imageSharer][socnet][TW] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_gp"></div>
-							<input type="checkbox" name="imageSharer[socnet][GP]" <?php if((int)$this->_options[imageSharer][socnet][GP] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_pi"></div>
-							<input type="checkbox" name="imageSharer[socnet][PI]" <?php if((int)$this->_options[imageSharer][socnet][PI] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_tr"></div>
-							<input type="checkbox" name="imageSharer[socnet][TR]" <?php if((int)$this->_options[imageSharer][socnet][TR] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_vk"></div>
-							<input type="checkbox" name="imageSharer[socnet][VK]" <?php if((int)$this->_options[imageSharer][socnet][VK] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_od"></div>
-							<input type="checkbox" name="imageSharer[socnet][OD]" <?php if((int)$this->_options[imageSharer][socnet][OD] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_lj"></div>
-							<input type="checkbox" name="imageSharer[socnet][LJ]" <?php if((int)$this->_options[imageSharer][socnet][LJ] == 1) echo 'checked';?>></label>
-							
-							<label><div class="pq_li"></div>
-							<input type="checkbox" name="imageSharer[socnet][LI]" <?php if((int)$this->_options[imageSharer][socnet][LI] == 1) echo 'checked';?>></label>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][FB]" <?php if((int)$this->_options[imageSharer][socnet][FB] == 1) echo 'checked';?>>
+									<div class="pq_fb"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][FB][type]" value="" <?php if($this->_options[imageSharer][socnetOption][FB][type] == '') echo 'checked';?>>
+									<input type="text" name="imageSharer[socnetOption][FB][app_id]" value="<?php if(stripslashes($this->_options[imageSharer][socnetOption][FB][app_id]) != '') echo stripslashes($this->_options[imageSharer][socnetOption][FB][app_id]);?>" placeholder="FaceBook APP ID">
+									<a href="https://developers.facebook.com/apps" target="blank"><img src="<?php echo plugins_url('images/set.png', __FILE__);?>" style="width: 12px; height: 12px; vertical-align: middle;" /></a>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][FB][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][FB][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][TW]" <?php if((int)$this->_options[imageSharer][socnet][TW] == 1) echo 'checked';?>>
+									<div class="pq_tw"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][TW][type]" value="" <?php if($this->_options[imageSharer][socnetOption][TW][type] == '') echo 'checked';?>>
+									<p>Default Twitter Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][TW][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][TW][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][GP]" <?php if((int)$this->_options[imageSharer][socnet][GP] == 1) echo 'checked';?>>
+									<div class="pq_gp"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][GP][type]" value="" <?php if($this->_options[imageSharer][socnetOption][GP][type] == '') echo 'checked';?>>
+									<p>Default Google+ Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][GP][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][GP][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][PI]" <?php if((int)$this->_options[imageSharer][socnet][PI] == 1) echo 'checked';?>>
+									<div class="pq_pi"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][PI][type]" value="" <?php if($this->_options[imageSharer][socnetOption][PI][type] == '') echo 'checked';?>>
+									<p>Default Pinterest Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][PI][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][PI][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][TR]" <?php if((int)$this->_options[imageSharer][socnet][TR] == 1) echo 'checked';?>>
+									<div class="pq_tr"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][TR][type]" value="" <?php if($this->_options[imageSharer][socnetOption][TR][type] == '') echo 'checked';?>>
+									<p>Default Tumbrl Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][TR][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][TR][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][VK]" <?php if((int)$this->_options[imageSharer][socnet][VK] == 1) echo 'checked';?>>
+									<div class="pq_vk"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][VK][type]" value="" <?php if($this->_options[imageSharer][socnetOption][VK][type] == '') echo 'checked';?>>
+									<p>Default VK Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][VK][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][VK][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>
+							<div class="pq_str">
+								<label>
+									<input type="checkbox" name="imageSharer[socnet][OD]" <?php if((int)$this->_options[imageSharer][socnet][OD] == 1) echo 'checked';?>>
+									<div class="pq_od"></div>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][OD][type]" value="" <?php if($this->_options[imageSharer][socnetOption][OD][type] == '') echo 'checked';?>>
+									<p>Default OK Share</p>
+								</label>
+								<label>
+									<input type="radio" name="imageSharer[socnetOption][OD][type]" value="pq" <?php if($this->_options[imageSharer][socnetOption][OD][type] == 'pq') echo 'checked';?>>
+									<p>Exact Image Without Apps & OG Tags</p>
+								</label>
+							</div>							
 						</div>
 						<div class="pq-md-10">
 						<div class="pq-sm-6 icons" style="padding-left: 0; margin: 20px 0;">
@@ -845,6 +923,19 @@ class ProfitQueryShareWidgetsClass
 								<option value="sh6" <?php if($this->_options[imageSharer][design][shadow] == 'sh6') echo 'selected';?>>Shadow6</option>
 							</select></label>
 						</div>
+						<div class="clear"></div>
+						<label>
+						<div class="pq_box">
+							<p>Follow Popup After Success</p><div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-id-switch-size bootstrap-switch-animate bootstrap-switch-mini bootstrap-switch-success">
+							<input type="checkbox" name="imageSharer[afterProceed][follow]" <?php if((int)$this->_options[imageSharer][afterProceed][follow] == 1) echo 'checked';?>></div>
+						</div>
+						</label>
+						<label>
+						<div class="pq_box">
+							<p>Thank Popup After Success</p><div class="bootstrap-switch bootstrap-switch-wrapper bootstrap-switch-on bootstrap-switch-id-switch-size bootstrap-switch-animate bootstrap-switch-mini bootstrap-switch-success">
+							<input type="checkbox" name="imageSharer[afterProceed][thank]" <?php if((int)$this->_options[imageSharer][afterProceed][thank] == 1) echo 'checked';?>></div>
+							<div class="pq_tooltip" data-toggle="tooltip" data-placement="left" title="For enable Follow Popup must be Off"></div>
+						</div></label>
 						<p style="font-family: pt sans narrow; font-size: 19px; margin: 20px 0 10px;">Only Design Live Demo</p>
 							<img src="<?php echo plugins_url('images/browser.png', __FILE__);?>" style="width: 100%; margin-bottom: -6px;" />
 							<div style="transform-origin: 0 0; transform: scale(0.8); width: 125%; height: 300px; box-sizing: border-box; border: 1px solid lightgrey;">

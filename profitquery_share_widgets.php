@@ -22,13 +22,13 @@
 * Plugin Name: Sharing Sidebar + Image Sharer | Share Widget
 * Plugin URI: http://profitquery.com/sharing_witgets.html
 * Description: Simply widgets for growth 3x website shares, referrals from social network and all for free.
-* Version: 1.0.3
+* Version: 1.0.4
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
 */
 
-
+//update_option('profitquery', array());
 $profitquery = get_option('profitquery');
 
 if (!defined('PROFITQUERY_SHARE_WIDGETS_PLUGIN_NAME'))
@@ -188,7 +188,7 @@ function profitquery_share_widgets_insert_code(){
 		'afterProfitLoader'=>$preparedObject[afterProceed]
 	);
 	
-	$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[imageSharer]);
+	$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[imageSharer]);	
 	$profitquerySmartWidgetsStructure['imageSharer'] = array(
 		'typeDesign'=>$preparedObject[design].' '.$preparedObject[position],
 		'minWidth'=>(int)$preparedObject[minWidth],
