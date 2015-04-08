@@ -1,7 +1,7 @@
 === Sharing Sidebar + Image Sharer | Share Widget ===
 Contributors: schemotechnik, ilya_v, frenly_girl
 Donate link: http://profitquery.com/sharing_witgets.html
-Tags: addthis, profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, images, post, social, free, profitquery sharing, growth, boost, referrals, pinterest, facebook, google plus, vk, twitter, tumblr, admin , AJAX, content, ecommerce, Facebook, image, images, javascript, link, links, media, page, pages, photo, photos, plugin, Post, posts, seo, Share, sidebar, social, twitter, widget, widgets, wordpress
+Tags: addthis, profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, thank page, images, floating buttons, onhover sharer, on hover image, post, social, free, profitquery sharing, content sharing, ecommerce, page sharer, photo sharer, photo posts, Post image, Share, sidebar, widget, widgets
 Requires at least: 2.9
 Tested up to: 4.1.1
 Stable tag: 1.0.4
