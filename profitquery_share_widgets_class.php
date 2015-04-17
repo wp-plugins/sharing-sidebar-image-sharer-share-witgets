@@ -23,7 +23,7 @@
 * @package  Wordpress_Plugin
 * @author   ShemOtechnik Profitquery Team <support@profitquery.com>
 * @license  http://www.php.net/license/3_01.txt  PHP License 3.01
-* @version  SVN: 2.0.1
+* @version  SVN: 2.0.2
 */
 
 class ProfitQueryShareWidgetsClass

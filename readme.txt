@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/sharing_witgets.html
 Tags: profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, thank page, images, floating buttons, onhover sharer, on hover image, post, social, free, profitquery sharing, content sharing, ecommerce, page sharer, photo sharer, photo posts, Post image, Share, sidebar, widget, widgets, share image
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website shares, referrals from social network and all for free.
@@ -117,6 +117,9 @@ All of the options required through this plugin require javascript. JavaScript m
 
 
 == Changelog ==
+
+= 2.0.2 =
+js update
 
 = 2.0.1 =
 fix select social network
