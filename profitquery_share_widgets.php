@@ -22,7 +22,7 @@
 * Plugin Name: Sharing Sidebar + Image Sharer | Share Widget
 * Plugin URI: http://profitquery.com/sharing_witgets.html
 * Description: Simply widgets for growth 3x website shares, referrals from social network and all for free.
-* Version: 1.0.4
+* Version: 2.0.1
 *
 * Author: Profitquery Team <support@profitquery.com>
 * Author URI: http://profitquery.com/?utm_campaign=subscribe_widgets_wp
@@ -116,30 +116,32 @@ function profitquery_share_widgets_insert_code(){
 			'disabled'=>1		
 		);
 	} else {
-		//Set standart from memory option
 		$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[subscribeBar]);
+		if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 		$profitquerySmartWidgetsStructure['subscribeBarOptions'] = array(
 			'title'=>stripslashes($preparedObject[title]),		
 			'disabled'=>(int)$preparedObject[disabled],
 			'afterProfitLoader'=>$preparedObject[afterProceed],
-			'typeWindow'=>'pq_bar '.stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]),
+			'typeWindow'=>'pq_bar '.stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]).' '.stripslashes($preparedObject[animation]),		
 			'inputEmailTitle'=>stripslashes($preparedObject[inputEmailTitle]),
 			'buttonTitle'=>stripslashes($preparedObject[buttonTitle]),
 			'formAction'=>stripslashes($profitquery[subscribeProviderUrl])
 		);
 		
-		$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[subscribeExit]);	
+		$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[subscribeExit]);
+		if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 		$profitquerySmartWidgetsStructure['subscribeExitPopupOptions'] = array(
 			'title'=>stripslashes($preparedObject[title]),
 			'sub_title'=>stripslashes($preparedObject[sub_title]),		
 			'img'=>stripslashes($preparedObject[img]),
 			'disabled'=>(int)$preparedObject[disabled],
 			'afterProfitLoader'=>$preparedObject[afterProceed],
-			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]),
+			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]).' '.stripslashes($preparedObject[animation]),
+			'blackoutOption'=>array('disable'=>0, 'style'=>stripslashes($preparedObject[overlay])),
 			'inputEmailTitle'=>stripslashes($preparedObject[inputEmailTitle]),
 			'buttonTitle'=>stripslashes($preparedObject[buttonTitle]),
 			'formAction'=>stripslashes($profitquery[subscribeProviderUrl])
-		);
+		);		
 	}
 	if((int)$profitquery[feedback_widgets_loaded] == 0){
 		$profitquerySmartWidgetsStructure['phoneCollectOptions'] = array(
@@ -150,14 +152,16 @@ function profitquery_share_widgets_insert_code(){
 		);
 	}else{
 		$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[callMe]);
+		if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 		$profitquerySmartWidgetsStructure['phoneCollectOptions'] = array(
 			'disabled'=>(int)$preparedObject[disabled],
 			'title'=>stripslashes($preparedObject[title]),
 			'sub_title'=>stripslashes($preparedObject[sub_title]),
 			'img'=>stripslashes($preparedObject[img]),
 			'buttonTitle'=>stripslashes($preparedObject[buttonTitle]),
-			'typeBookmark'=>stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[loader_background]),			
-			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]),
+			'typeBookmark'=>stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[loader_background]).' pq_call',			
+			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]).' '.stripslashes($preparedObject[animation]),
+			'blackoutOption'=>array('disable'=>0, 'style'=>stripslashes($preparedObject[overlay])),
 			'afterProfitLoader'=>$preparedObject[afterProceed],
 			'emailOption'=>array(
 				'to_email'=>stripslashes($profitquery[adminEmail])			
@@ -165,19 +169,21 @@ function profitquery_share_widgets_insert_code(){
 		);
 		
 		$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[contactUs]);
+		if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 		$profitquerySmartWidgetsStructure['contactUsOptions'] = array(
 			'disabled'=>(int)$preparedObject[disabled],
 			'title'=>stripslashes($preparedObject[title]),
 			'sub_title'=>stripslashes($preparedObject[sub_title]),
 			'img'=>stripslashes($preparedObject[img]),
 			'buttonTitle'=>stripslashes($preparedObject[buttonTitle]),
-			'typeBookmark'=>stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[loader_background]),			
-			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]),
+			'typeBookmark'=>stripslashes($preparedObject[position]).' '.stripslashes($preparedObject[loader_background]).' pq_contact',			
+			'typeWindow'=>stripslashes($preparedObject[typeWindow]).' '.stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[button_color]).' '.stripslashes($preparedObject[animation]),
+			'blackoutOption'=>array('disable'=>0, 'style'=>stripslashes($preparedObject[overlay])),
 			'afterProfitLoader'=>$preparedObject[afterProceed],
 			'emailOption'=>array(
 				'to_email'=>stripslashes($profitquery[adminEmail])			
 			)
-		);
+		);		
 	}
 	$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[sharingSideBar]);
 	$preparedObject[socnet][typeBlock] = 'pq-social-block '.$preparedObject[design];
@@ -198,21 +204,25 @@ function profitquery_share_widgets_insert_code(){
 	);	
 	
 	$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[thankPopup]);
+	if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 	$profitquerySmartWidgetsStructure['thankPopupOptions'] = array(
 		'title'=>stripslashes($preparedObject[title]),
 		'sub_title'=>stripslashes($preparedObject[sub_title]),
-		'typeWindow'=>stripslashes($preparedObject[background]),
+		'typeWindow'=>stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[animation]),
+		'blackoutOption'=>array('disable'=>0, 'style'=>stripslashes($preparedObject[overlay])),
 		'img'=>stripslashes($preparedObject[img]),
 		'buttonTitle'=>stripslashes($preparedObject[buttonTitle])
 	);
 	
 	$preparedObject = $ProfitQueryShareWidgetsClass->prepare_sctructure_product($profitquery[follow]);
+	if($preparedObject[animation] && $preparedObject[animation] != 'fade') $preparedObject[animation] = 'pq_animated '.$preparedObject[animation];
 	$profitquerySmartWidgetsStructure['followUsOptions'] = array(
 		'title'=>stripslashes($preparedObject[title]),
 		'sub_title'=>stripslashes($preparedObject[sub_title]),
-		'typeWindow'=>stripslashes($preparedObject[background]),
+		'typeWindow'=>stripslashes($preparedObject[background]).' '.stripslashes($preparedObject[animation]),
+		'blackoutOption'=>array('disable'=>0, 'style'=>stripslashes($preparedObject[overlay])),
 		'socnetIconsBlock'=>$preparedObject[follow_socnet]
-	);	
+	);		
 
 	
 	print "

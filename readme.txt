@@ -4,7 +4,7 @@ Donate link: http://profitquery.com/sharing_witgets.html
 Tags: profitquery, widgets, sidebar, share, sharer, sharing, follow button, image sharer, thank page, images, floating buttons, onhover sharer, on hover image, post, social, free, profitquery sharing, content sharing, ecommerce, page sharer, photo sharer, photo posts, Post image, Share, sidebar, widget, widgets, share image
 Requires at least: 2.9
 Tested up to: 4.1.1
-Stable tag: 1.0.4
+Stable tag: 2.0.1
 License: GPL 2. See License below for copyright jots and tittles.
 
 Simply widgets for growth 3x website shares, referrals from social network and all for free.
@@ -23,7 +23,7 @@ Simply widgets for growth 3x website shares, referrals from social network and a
 7. Google Analitics integration
 8. All options on your wordpress admin area
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=sidebarShare&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Sharing Sidebar Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=sidebarShare&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Sharing Sidebar Live Demo</a><br>
 
 
 = On Hover Image Sharer =
@@ -39,7 +39,7 @@ Simply widgets for growth 3x website shares, referrals from social network and a
 9. Free distribution
 10. All options on your wordpress admin area
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=imageSharer&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Image Sharer Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=imageSharer&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Image Sharer Live Demo</a><br>
 
 
 = Following =
@@ -52,7 +52,7 @@ Simply widgets for growth 3x website shares, referrals from social network and a
 7. All options on your wordpress admin area
 8. You can bind open popup with any block on your website click
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=follow&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Following Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=follow&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Following Live Demo</a><br>
 
 
 = Thank Popup =
@@ -67,7 +67,7 @@ Simply widgets for growth 3x website shares, referrals from social network and a
 9. All options on your wordpress admin area
 10. You can bind open popup with any block on your website click
 
-<br><a href="http://profitquery.com/aio_wp_demo_carousel.html?p=thankPopup&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Thank Popup Live Demo</a><br>
+<br><a href="http://profitquery.com/aio_wp_demo_carousel_v2.html?p=thankPopup&return=https://wordpress.org/plugins/sharing-sidebar-image-sharer-share-witgets/" target="_blank">Thank Popup Live Demo</a><br>
 
 <br>
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -117,6 +117,17 @@ All of the options required through this plugin require javascript. JavaScript m
 
 
 == Changelog ==
+
+= 2.0.1 =
+fix select social network
+
+= 2.0 =
+major update:
+add 2d 3d animation
+add hover effects
+refactoring icons
+sript load time
+
 = 1.0.4 =
 add several type image sharer
 
